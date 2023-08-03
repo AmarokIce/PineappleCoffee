@@ -15,7 +15,7 @@ fun random(): Random = Random()
 
 /* Item Util */
 fun ItemLike.asItemStack(size: Int = 1): ItemStack = ItemStack(this, size)
-fun ItemLike.setTab(tab: GroupObject): ItemLike {
+fun Item.setTab(tab: GroupObject): Item {
     tab.addItem(this)
     return this
 }

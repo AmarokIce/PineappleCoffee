@@ -30,46 +30,46 @@ object MultiBlockBase {
 
         when (face) {
             Direction.EAST -> {
-                val originPos = BlockPos(basePos.x + ox, basePos.y, basePos.z - oz);
+                val originPos = BlockPos(basePos.x + ox, basePos.y, basePos.z - oz)
                 for (y in 0 until maxY) {
-                    var i = 0;
+                    var i = 0
                     for (x in 0 downTo -4)
                         for (z in 0..4)
                             if (!chunkBlockInMap(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), y, i++))
-                                return false;
+                                return false
                 }
             }
 
             Direction.SOUTH -> {
                 val originPos = BlockPos(basePos.x + oz, basePos.y, basePos.z + ox)
                 for (y in 0 until maxY) {
-                    var i = 0;
+                    var i = 0
                     for (x in 0 downTo -4)
                         for (z in 0 downTo -4)
                             if (!chunkBlockInMap(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), y, i++))
-                                return false;
+                                return false
                 }
             }
 
             Direction.WEST -> {
                 val originPos = BlockPos(basePos.x - ox, basePos.y, basePos.z + oz)
                 for (y in 0 until maxY) {
-                    var i = 0;
+                    var i = 0
                     for (x in 0..4)
                         for (z in 0 downTo -4)
                             if (!chunkBlockInMap(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), y, i++))
-                                return false;
+                                return false
                 }
             }
 
             Direction.NORTH -> {
                 val originPos = BlockPos(basePos.x - oz, basePos.y, basePos.z - ox)
                 for (y in 0 until maxY) {
-                    var i = 0;
+                    var i = 0
                     for (x in 0..4)
                         for (z in 0..4)
                             if (!chunkBlockInMap(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), y, i++))
-                                return false;
+                                return false
                 }
             }
 
@@ -79,7 +79,7 @@ object MultiBlockBase {
         if (shouldRemoveBlock) {
             when (face) {
                 Direction.EAST -> {
-                    val originPos = BlockPos(basePos.x + ox, basePos.y, basePos.z - oz);
+                    val originPos = BlockPos(basePos.x + ox, basePos.y, basePos.z - oz)
                     for (y in 0 until maxY) {
                         for (x in 0 downTo -4)
                             for (z in 0..4)
