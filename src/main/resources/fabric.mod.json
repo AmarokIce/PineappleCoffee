@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "ovo",
+  "id": "pineapple_coffee",
   "version": "${version}",
 
-  "name": "OVO",
-  "description": "Create with JSON!",
+  "name": "Pineapple Coffee",
+  "description": "Just a lib.",
   "authors": [
     "Someoneice"
   ],
@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "club.someoneice.ovo.OVOMainKt::init"
+      "club.someoneice.pc.PCMain"
     ]
   },
   "mixins": [

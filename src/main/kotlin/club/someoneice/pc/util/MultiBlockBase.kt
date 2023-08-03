@@ -81,7 +81,6 @@ object MultiBlockBase {
                 Direction.EAST -> {
                     val originPos = BlockPos(basePos.x + ox, basePos.y, basePos.z - oz);
                     for (y in 0 until maxY) {
-                        var i = 0;
                         for (x in 0 downTo -4)
                             for (z in 0..4)
                                 world.removeBlock(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), false)
@@ -91,7 +90,6 @@ object MultiBlockBase {
                 Direction.SOUTH -> {
                     val originPos = BlockPos(basePos.x + oz, basePos.y, basePos.z + ox)
                     for (y in 0 until maxY) {
-                        var i = 0;
                         for (x in 0 downTo -4)
                             for (z in 0 downTo -4)
                                 world.removeBlock(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), false)
@@ -101,7 +99,6 @@ object MultiBlockBase {
                 Direction.WEST -> {
                     val originPos = BlockPos(basePos.x - ox, basePos.y, basePos.z + oz)
                     for (y in 0 until maxY) {
-                        var i = 0;
                         for (x in 0..4)
                             for (z in 0 downTo -4)
                                 world.removeBlock(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), false)
@@ -111,7 +108,6 @@ object MultiBlockBase {
                 Direction.NORTH -> {
                     val originPos = BlockPos(basePos.x - oz, basePos.y, basePos.z - ox)
                     for (y in 0 until maxY) {
-                        var i = 0;
                         for (x in 0..4)
                             for (z in 0..4)
                                 world.removeBlock(BlockPos(originPos.x + x, originPos.y + y, originPos.z + z), false)
