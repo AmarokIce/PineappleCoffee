@@ -63,13 +63,9 @@ publishing {
             }
         }
     }
-
-    repositories {
-    }
 }
 
-def apply_maven = true
-if (apply_maven) {
-    apply from: 'maven.gradle'
-}
+
+apply from: 'maven.gradle'
+
 compileKotlin.kotlinOptions.jvmTarget = "17"
