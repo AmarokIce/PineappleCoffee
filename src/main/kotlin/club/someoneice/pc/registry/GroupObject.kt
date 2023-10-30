@@ -2,6 +2,7 @@ package club.someoneice.pc.registry
 
 import com.google.common.collect.Lists
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
@@ -17,7 +18,7 @@ class GroupObject internal constructor(private val name: String, private val ite
     }
 
     internal fun registryGroup(): CreativeModeTab =
-        FabricItemGroup.builder().icon{ itemIcon }.displayItems {
+        FabricItemGroup.builder().title(Component.translatable(name)).icon{ itemIcon }.displayItems {
                 _, output -> this.itemList.forEach { output.accept(it) }
         }.build()
 }

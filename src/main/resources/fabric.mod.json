@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "club.someoneice.pc.PCMain"
+      "club.someoneice.pc.PCMainKt::init"
     ]
   },
   "mixins": [
