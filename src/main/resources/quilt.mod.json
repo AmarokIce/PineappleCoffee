@@ -1,0 +1,43 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "club.someoneice.pc",
+		"id": "pineapple_coffee",
+		"version": "${version}",
+		"metadata": {
+			"name": "Pineapple Coffee",
+			"description": "A lib mod for Quilt, PineappleCoffee. Make your coding look like KFF.",
+			"contributors": {
+				"Someoneice": "Owner"
+			},
+			"contact": {
+			},
+			"icon": ""
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": {
+				"adapter": "kotlin",
+				"value": "club.someoneice.pc.PCMain"
+			}
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.19.2"
+			},
+			{
+				"id": "quilted_fabric_api",
+				"versions": ">=7.0.2"
+			},
+			{
+				"id": "qkl",
+				"versions": ">=2.1.0"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.20"
+			}
+		]
+	}
+}
