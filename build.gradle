@@ -46,7 +46,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-    includeCompile "club.someoneice.json:amarok-json-for-java:1.2"
+    includeCompile "club.someoneice.json:amarok-json-for-java:1.4.4"
 }
 
 java {

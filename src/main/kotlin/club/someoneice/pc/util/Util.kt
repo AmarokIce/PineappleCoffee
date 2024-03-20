@@ -1,6 +1,7 @@
 package club.someoneice.pc.util
 
 import club.someoneice.pc.registry.GroupObject
+import net.minecraft.network.chat.Component
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.item.Item
@@ -8,8 +9,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.Map
 
 fun random(): Random = Random()
 
@@ -22,6 +21,10 @@ fun Item.setTab(tab: GroupObject): Item {
 
 /* MobEffect Util */
 fun MobEffect.instance(time: Int, amplifier: Int = 0): MobEffectInstance = MobEffectInstance(this, time, amplifier)
+
+/* String Chat Util */
+fun String.translatable(): Component = Component.translatable(this)
+fun String.literal(): Component = Component.literal(this)
 
 /* Other Util */
 fun getItemByBlock(block: Block): Item? = Item.BY_BLOCK[block]
