@@ -9,6 +9,7 @@ import club.someoneice.pc.api.IPineappleConfig
 import club.someoneice.pc.event.PineappleConfigEvent
 import club.someoneice.pc.event.bus.PostMan
 import com.google.common.collect.Maps
+import net.fabricmc.loader.api.FabricLoader
 import java.io.File
 import java.io.IOException
 
@@ -16,7 +17,7 @@ import java.io.IOException
 open class ConfigBean(private val configName: String) {
     private var mapBean: Json5Builder.ObjectBean = ConfigUtil.objectBean()
     private val nodeMapping: MutableMap<String, Json5Builder.ObjectBean> = Maps.newHashMap<String, Json5Builder.ObjectBean>()
-    private val file: File = File(System.getProperty("user.dir") + "config", "$configName.json5")
+    private val file: File = File(FabricLoader.getInstance().configDir.toFile(), "$configName.json5")
     private val nodeBase: MapNode = try { ConfigUtil.readFromJson(file) } catch (e: IOException) { MapNode() }
 
 
