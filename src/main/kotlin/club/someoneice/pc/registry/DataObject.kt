@@ -1,11 +1,11 @@
 package club.someoneice.pc.registry
 
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Identifier
 import java.util.function.Supplier
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class DataObject<T>(val id: ResourceLocation, val value: Supplier<T>)
+class DataObject<T>(val id: Identifier, val value: Supplier<T>)
 class RegistryObject<T>(private val registryObject: DataObject<T>) : ReadOnlyProperty<Any, T>, Supplier<T>, () -> T {
     override fun getValue(thisRef: Any, property: KProperty<*>): T = registryObject.value.get()
     override fun invoke(): T = registryObject.value.get()

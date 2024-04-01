@@ -24,11 +24,6 @@ jar {
 
 repositories {
     maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
-    }
-
-    maven {
         name = "Amarok Maven"
         allowInsecureProtocol = true
         url 'http://maven.snowlyicewolf.club'
@@ -37,16 +32,14 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-         officialMojangMappings()
-         parchment("org.parchmentmc.data:parchment-1.19.3:2023.06.25@zip")
-    }
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    includeCompile "club.someoneice.json:amarok-json-for-java:1.4.4"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+    includeCompile "club.someoneice.json:amarok-json-for-java:1.4.5"
 }
 
 java {

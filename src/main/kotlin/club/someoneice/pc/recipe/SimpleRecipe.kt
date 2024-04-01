@@ -1,29 +1,28 @@
 package club.someoneice.pc.recipe
 
-import net.minecraft.core.RegistryAccess
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.inventory.CraftingContainer
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.CraftingBookCategory
-import net.minecraft.world.item.crafting.RepairItemRecipe
-import net.minecraft.world.level.Level
+import net.minecraft.inventory.RecipeInputInventory
+import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RepairItemRecipe
+import net.minecraft.recipe.book.CraftingRecipeCategory
+import net.minecraft.registry.DynamicRegistryManager
+import net.minecraft.world.World
 
-open class SimpleRecipe(name: ResourceLocation, book: CraftingBookCategory = CraftingBookCategory.MISC,
-                   val match: (inv: CraftingContainer, world: Level) -> Boolean?,
-                   val craft: (inv: CraftingContainer, assets: RegistryAccess) -> ItemStack?,
+open class SimpleRecipe(book: CraftingRecipeCategory = CraftingRecipeCategory.MISC,
+                   val match: (inv: RecipeInputInventory, world: World) -> Boolean?,
+                   val craft: (inv: RecipeInputInventory, assets: DynamicRegistryManager) -> ItemStack?,
                    val size: (x: Int, y: Int) -> Boolean = { _, _ -> true},
-    ): RepairItemRecipe(name, book) {
-    internal constructor(name: ResourceLocation, book: CraftingBookCategory): this(name, book, { _, _ -> null }, { _, _ -> null })
+    ): RepairItemRecipe(book) {
+    internal constructor(book: CraftingRecipeCategory): this(book, { _, _ -> null }, { _, _ -> null })
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+    override fun fits(width: Int, height: Int): Boolean {
         return this.size(width, height)
     }
 
-    override fun matches(inv: CraftingContainer, level: Level): Boolean {
+    override fun matches(inv: RecipeInputInventory, level: World): Boolean {
         return this.match(inv, level) ?: super.matches(inv, level)
     }
 
-    override fun assemble(craftingContainer: CraftingContainer, registryAccess: RegistryAccess): ItemStack {
-        return this.craft(craftingContainer, registryAccess) ?: super.assemble(craftingContainer, registryAccess)
+    override fun craft(recipe: RecipeInputInventory, registryAccess: DynamicRegistryManager): ItemStack {
+        return this.craft(recipe, registryAccess) ?: super.craft(recipe, registryAccess)
     }
 }

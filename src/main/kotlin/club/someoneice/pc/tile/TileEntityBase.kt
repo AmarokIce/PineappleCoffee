@@ -2,29 +2,29 @@ package club.someoneice.pc.tile
 
 import club.someoneice.pc.PCMain
 import club.someoneice.pc.api.SaveToNbt
-import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.entity.BlockEntityType
-import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.block.BlockState
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.math.BlockPos
 import java.lang.reflect.Field
 
 abstract class TileEntityBase(type: BlockEntityType<*>, pos: BlockPos, state: BlockState): BlockEntity(type, pos, state) {
-    abstract fun writeToNbt(nbt: CompoundTag)
-    abstract fun readFromNbt(nbt: CompoundTag)
+    abstract fun writeToNbt(nbt: NbtCompound)
+    abstract fun readFromNbt(nbt: NbtCompound)
 
-    override fun load(nbt: CompoundTag) {
-        super.load(nbt)
-        for (field in this.javaClass.getDeclaredFields()) {
+    override fun readNbt(nbt: NbtCompound) {
+        super.readNbt(nbt)
+        for (field in this.javaClass.declaredFields) {
             try                  { getFromNBT(field!!, nbt) }
             catch (e: Exception) { PCMain.LOGGER.error(e)   }
         }
         this.readFromNbt(nbt)
     }
 
-    override fun saveAdditional(nbt: CompoundTag) {
-        super.saveAdditional(nbt)
-        for (field in this.javaClass.getDeclaredFields()) {
+    override fun writeNbt(nbt: NbtCompound) {
+        super.writeNbt(nbt)
+        for (field in this.javaClass.declaredFields) {
             try                  { putToNBT(field, nbt)   }
             catch (e: Exception) { PCMain.LOGGER.error(e) }
         }
@@ -32,8 +32,8 @@ abstract class TileEntityBase(type: BlockEntityType<*>, pos: BlockPos, state: Bl
     }
 
     @Throws(IllegalAccessException::class)
-    private fun putToNBT(field: Field, nbt: CompoundTag) {
-        field.setAccessible(true)
+    private fun putToNBT(field: Field, nbt: NbtCompound) {
+        field.isAccessible = true
         if (!field.isAnnotationPresent(SaveToNbt::class.java)) return
         val name: String = field.getAnnotation(SaveToNbt::class.java).value
         when (val obj = field[this]) {
@@ -46,8 +46,8 @@ abstract class TileEntityBase(type: BlockEntityType<*>, pos: BlockPos, state: Bl
     }
 
     @Throws(IllegalAccessException::class)
-    private fun getFromNBT(field: Field, nbt: CompoundTag) {
-        field.setAccessible(true)
+    private fun getFromNBT(field: Field, nbt: NbtCompound) {
+        field.isAccessible = true
         if (!field.isAnnotationPresent(SaveToNbt::class.java)) return
         val name: String = field.getAnnotation(SaveToNbt::class.java).value
         when (field[this]) {

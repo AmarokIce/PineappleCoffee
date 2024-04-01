@@ -1,24 +1,24 @@
 package club.someoneice.pc.registry
 
+import club.someoneice.pc.util.translatable
 import com.google.common.collect.Lists
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
-import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.CreativeModeTab
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.ItemLike
+import net.minecraft.item.Item
+import net.minecraft.item.ItemConvertible
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
+import net.minecraft.util.Identifier
 
 class GroupObject internal constructor(private val name: String, private val itemIcon: ItemStack) {
     private var itemList = Lists.newArrayList<Item>()
-    fun getName(modid: String): ResourceLocation = ResourceLocation(modid, name)
-    fun addItem(item: ItemLike) = this.itemList.add(item.asItem())
+    fun getName(modid: String): Identifier = Identifier(modid, name)
+    fun addItem(item: ItemConvertible) = this.itemList.add(item.asItem())
     fun replaceItemList(list: ArrayList<Item>) {
         this.itemList = list
     }
 
-    internal fun registryGroup(): CreativeModeTab =
-        FabricItemGroup.builder().title(Component.translatable(name)).icon{ itemIcon }.displayItems {
-                _, output -> this.itemList.forEach { output.accept(it) }
+    internal fun registryGroup(): ItemGroup =
+        FabricItemGroup.builder().displayName(name.translatable()).icon{ itemIcon }.entries {
+                _, output -> this.itemList.forEach { output.add(it) }
         }.build()
 }

@@ -1,11 +1,11 @@
 package club.someoneice.pc.util
 
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
+import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
+import net.minecraft.world.World
 
 object MultiBlockBase {
     /**
@@ -21,11 +21,11 @@ object MultiBlockBase {
      *
      * And the key of the map is the Y floor. <br />
      **/
-    fun checkMultiBlock(maps: Map<Int, List<Block?>>, player: Player, world: Level, basePos: BlockPos, ox: Int, oz: Int, face: Direction = player.direction, maxY: Int = maps.size, shouldRemoveBlock: Boolean): Boolean {
+    fun checkMultiBlock(maps: Map<Int, List<Block?>>, player: PlayerEntity, world: World, basePos: BlockPos, ox: Int, oz: Int, face: Direction = player.movementDirection, maxY: Int = maps.size, shouldRemoveBlock: Boolean): Boolean {
         fun chunkBlockInMap(pos: BlockPos, y: Int, size: Int): Boolean {
             val block = maps[y]!![size]
             return if (block == Blocks.AIR || block == null) true
-            else world.getBlockState(pos).`is`(block)
+            else world.getBlockState(pos).isOf(block)
         }
 
         when (face) {
